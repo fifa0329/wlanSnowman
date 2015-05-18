@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.snowman.wlan.ui"
+      android:versionCode="1"
+      android:versionName="1.0">    
+
+    <application android:name="com.snowman.wlan.engine.SmartWifiApplication" android:icon="@drawable/wlan_icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name=".WelActivity"
+                  android:label="@string/app_name"
+                  android:launchMode="singleTask"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" android:launchMode="singleInstance" />
+		<activity android:name=".HomeActivity" />
+		<activity android:name=".AccActivity" />		
+		<activity android:name=".SetActivity" />
+		<activity android:name=".HelpActivity" />
+		<activity android:name=".CardListActivity" />
+		<activity android:name=".SettingSetActivity" />
+		<activity android:name=".AboutActivity" />
+		<activity android:name=".ShoppingActivity" />
+		<activity android:name=".ResetActivity" />
+		<activity android:name=".FeedbackActivity" />
+		<activity android:name=".AuthDialog"
+			android:launchMode="singleInstance"
+			android:excludeFromRecents="true"
+			android:taskAffinity=""
+			android:theme="@android:style/Theme.Dialog" />
+		<activity android:name=".LogoutDialog" android:theme="@android:style/Theme.Dialog" />
+		<activity android:name=".SystemSwitchDialog" android:theme="@android:style/Theme.Dialog" />
+		<receiver android:name="com.snowman.wlan.engine.BootBroadcastReceiver">
+    		<intent-filter>
+        		<action android:name="android.intent.action.BOOT_COMPLETED" />
+    		</intent-filter>
+		</receiver>
+		<service android:name="com.snowman.wlan.engine.WLANEngineService" />
+    </application>
+    
+    <uses-sdk android:minSdkVersion="7" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_LOGS" />
+</manifest>

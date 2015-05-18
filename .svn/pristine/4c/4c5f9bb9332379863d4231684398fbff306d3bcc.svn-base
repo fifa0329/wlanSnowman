@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">智能WiFi助手</string>
+    <string name="main_comment">评论</string>
+    <string name="main_message">私信</string>    
+      <string name="main_home">首页</string>     
+      <string name="account">账号</string>
+      <string name="setting">设置</string> 
+      <string name="help">帮助</string>
+      <string name="card">购卡</string>  
+      <string name="user">用户名或手机号</string>
+      <string name="password">密码</string>
+      <string name="btn">移动账号</string>
+      <string name="mss">用户登录</string>
+      <string name="err">请重新输入！</string>
+      
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">点击可以刷新</string>
+    
+</resources>

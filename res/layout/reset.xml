@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home"
+    android:orientation="vertical" 
+    android:id="@+id/linearLayout1">
+    
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/title2"
+        android:gravity="center_horizontal|center_vertical" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20.0sp"
+            android:textColor="#d9d9d9"
+            android:text="重置"
+             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical|left|right" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运营商" 
+            android:textSize="18.0sp"
+            android:textColor="#ff545454"
+            android:layout_marginLeft="15.0dip" />
+
+        <Spinner
+            android:id="@+id/yunyingshang"
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40.0dip" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical|left|right" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="套    餐" 
+            android:textSize="18.0sp"
+            android:textColor="#ff545454"
+            android:layout_marginLeft="15.0dip"/>
+
+        <Spinner
+            android:id="@+id/taocan"
+            android:layout_width="300px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40.0dip"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical" >
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="确定" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="200px"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:layout_marginLeft="20.0dip" />
+
+    </LinearLayout>
+    
+ </LinearLayout>

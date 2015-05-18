@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home"
+    android:orientation="vertical" 
+    android:id="@+id/about">
+    
+        <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/title2"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20.0sp"
+            android:textColor="#d9d9d9"
+            android:text="关于我们" />
+
+    </LinearLayout>
+    
+    <WebView     
+	    android:id="@+id/webview"    
+	    android:layout_width="fill_parent"    
+	    android:layout_height="fill_parent"    
+	    />
+    
+ </LinearLayout>

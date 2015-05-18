@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/home" >
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/title2"
+        >
+        
+        <LinearLayout
+	        android:layout_width="0dip"
+	        android:layout_height="40dip"
+	        android:gravity="center_horizontal"
+	        android:layout_weight="1"
+	        >
+	        
+	        <TextView
+	            android:id="@+id/textView2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:text="购   卡"
+	            android:textColor="#d9d9d9"
+	            android:textSize="20.0sp" />
+	    </LinearLayout>
+
+        <Button
+            android:id="@+id/orderList"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已购" />
+
+    </LinearLayout>
+
+    <com.snowman.wlan.widget.PullToRefreshListView
+	  	android:id="@+id/wificard_listview"
+	    style="@style/widget_listview"/>
+
+</LinearLayout>

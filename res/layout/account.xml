@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/home" >
+    
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/title2"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20.0sp"
+            android:textColor="#d9d9d9"
+            android:text="账  号" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cmcc"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip" 
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="移动账号"
+            android:textSize="18.0sp"
+            android:textColor="#ff545454"
+            android:layout_marginLeft="20.0dip" 
+            android:layout_weight="1.0"/>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="12dip"
+            android:layout_height="12dip"
+            android:src="@drawable/into"
+            android:layout_marginRight="20dip"  />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line" />
+
+    <LinearLayout
+        android:id="@+id/telecom"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:gravity="center_vertical"  >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电信账号"
+            android:textSize="18.0sp"
+            android:textColor="#ff545454"
+            android:layout_marginLeft="20.0dip" 
+            android:layout_weight="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="12dip"
+            android:layout_height="12dip"
+            android:src="@drawable/into" 
+            android:layout_marginRight="20dip" />
+
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line" />
+    
+    <!--
+    <LinearLayout
+        android:id="@+id/wangwang"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:gravity="center_vertical"  >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="旺旺账号"
+            android:textSize="18.0sp"
+            android:textColor="#ff545454"
+            android:layout_marginLeft="20.0dip" 
+            android:layout_weight="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="12dip"
+            android:layout_height="12dip"
+            android:src="@drawable/into" 
+            android:layout_marginRight="20dip" />
+
+    </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line" />
+	-->
+</LinearLayout>

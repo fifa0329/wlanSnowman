@@ -1,0 +1,171 @@
+package com.snowman.wlan.ui;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+
+public class ShoppingActivity extends Activity {
+	private static int ACCOUNT_TYPE_CMCC = 1;
+	private static int ACCOUNT_TYPE_CT = 2;
+	private static String CMCC_ACCOUNT_PATTERN = "<div class=\"uword\">.*?[^0-9](1(3[4-9]|5[012789]|8[78])\\d{8})[^0-9].*?</div>";
+	private static String CT_ACCOUNT_PATTERN = "<div class=\"uword\">.*?[^0-9]((18[09]|13[35])\\d{8})[^0-9].*?</div>";
+	private static String CH_ACCOUNT_PATTERN = "<div class=\"uword\">.*?((C|c)(H|h)[0-9]{9}).*?</div>";
+	private static String W_ACCOUNT_PATTERN = "<div class=\"uword\">.*?((W|w)(1|2|9)[0-9]{10}).*?</div>";
+	private static String PASSWORD_PATTERN = "<div class=\"uword\">.*?[^0-9](\\d{6,8})[^0-9].*?</div>";
+	private Pattern cmccAccountPattern = null;
+	private Pattern ctAccountPattern = null;
+	private Pattern chAccountPattern = null;
+	private Pattern wAccountPattern = null;
+	private Pattern passwordPattern = null;
+	
+	private String pageBody;
+	private Button finish, back;
+	private WebView mWebView;
+	
+	private class HtmlOutJavaScript {  
+	    public void showHTML(String html) {  
+	    	pageBody = html;
+	    }
+	}
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.shopping);
+		
+		cmccAccountPattern = Pattern.compile(CMCC_ACCOUNT_PATTERN, Pattern.MULTILINE|Pattern.DOTALL);
+		ctAccountPattern = Pattern.compile(CT_ACCOUNT_PATTERN, Pattern.MULTILINE|Pattern.DOTALL);
+		chAccountPattern = Pattern.compile(CH_ACCOUNT_PATTERN, Pattern.MULTILINE|Pattern.DOTALL);
+		wAccountPattern = Pattern.compile(W_ACCOUNT_PATTERN, Pattern.MULTILINE|Pattern.DOTALL);
+		passwordPattern = Pattern.compile(PASSWORD_PATTERN, Pattern.MULTILINE|Pattern.DOTALL);
+		
+        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.addJavascriptInterface(new HtmlOutJavaScript(), "HTMLOUT");
+        mWebView.setWebViewClient(new WebViewClient() {
+        	@Override
+        	public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            	Log.i("WLANEngine", "loading url: " + url);
+            	//view.loadUrl(url);
+                return false;
+            }
+        	
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                view.loadUrl("javascript:window.HTMLOUT.showHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+            }
+        });
+        
+        String shoppingUrl = getIntent().getStringExtra("shopping_url");
+        if (shoppingUrl == null) {
+        	shoppingUrl = "http://m.taobao.com/trade/bought_item_lists.htm?statusId=1";
+        }
+        mWebView.loadUrl(shoppingUrl);
+        
+		back = (Button) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+        
+		finish = (Button) findViewById(R.id.finish);
+		finish.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String url = mWebView.getUrl();
+				if (url == null) {
+					showAlertDialog("请进入已购电子卡的旺旺页面，再点击完成提取卡号密码", false);
+					return;
+				}
+				
+				Log.i("WLANEngine", "current url: " + url);
+				if (!url.startsWith("http://im.m.taobao.com")) {
+					showAlertDialog("请进入已购电子卡的旺旺页面，再点击完成提取卡号密码", false);
+					mWebView.loadUrl("http://im.m.taobao.com/ww/ad_ww_lately_contacts.htm");
+					return;
+				}
+				
+				Matcher cmccAccountMatcher = cmccAccountPattern.matcher(pageBody);
+				Matcher ctAccountMatcher = ctAccountPattern.matcher(pageBody);
+				Matcher chAccountMatcher = chAccountPattern.matcher(pageBody);
+				Matcher wAccountMatcher = wAccountPattern.matcher(pageBody);
+				Matcher passwordMatcher = passwordPattern.matcher(pageBody);
+				if (!passwordMatcher.find()) {
+					showAlertDialog("提取卡号密码失败，请手工输入", false);
+					return;
+				}
+				String account = null;
+				String password = passwordMatcher.group(1);
+				int type = 0;
+				if (cmccAccountMatcher.find()) {
+					account = cmccAccountMatcher.group(1);
+					type = ACCOUNT_TYPE_CMCC;
+				} else if (ctAccountMatcher.find()) {
+					account = ctAccountMatcher.group(1);
+					type = ACCOUNT_TYPE_CT;
+				} else if (chAccountMatcher.find()) {
+					account = chAccountMatcher.group(1);
+					type = ACCOUNT_TYPE_CT;
+				} else if (wAccountMatcher.find()) {
+					account = wAccountMatcher.group(1);
+					type = ACCOUNT_TYPE_CT;
+				} else {
+					showAlertDialog("提取卡号密码失败，请手工输入", false);
+					return;
+				}
+				final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ShoppingActivity.this);
+				if (type == ACCOUNT_TYPE_CMCC) {
+					prefs.edit()
+						.putString("cmcc_user", account)
+						.putString("cmcc_password", password)
+						.commit();
+					showAlertDialog("提取移动卡号密码成功，您下次登录时将使用此账号", true);
+				} else if (type == ACCOUNT_TYPE_CT) {
+					prefs.edit()
+						.putString("ct_user", account)
+						.putString("ct_password", password)
+						.commit();
+					showAlertDialog("提取电信卡号密码成功，您下次登录时将使用此账号", true);
+				}
+			}
+		});
+	}
+	
+	private void showAlertDialog(String message, final boolean finish) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(ShoppingActivity.this);
+		builder.setIcon(R.drawable.wlan_icon);
+		builder.setTitle("提示");
+		builder.setMessage(message);
+		builder.setNegativeButton("确定",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int whichButton) {
+						if (finish) {
+							finish();
+						}
+					}
+				});
+		builder.create().show();
+	}
+	
+}

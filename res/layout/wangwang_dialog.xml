@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/cmcc_dialog" >
+    
+      <LinearLayout 
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialogname"   >
+           <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账号"
+                android:textSize="20.0sp"
+                android:layout_marginLeft="10dip"
+                android:id="@+id/dl3_tv1"/>
+          <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wangwang_user"
+                android:minWidth="200dp"
+                android:singleLine="true"
+                android:layout_marginLeft="10dip"
+                />
+      </LinearLayout>
+
+</RelativeLayout>
